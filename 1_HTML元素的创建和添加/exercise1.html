@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>jQuery创建和添加HTML元素</title>
+		<style>
+			#mydiv{
+				padding: 10px;
+				border: 2px dashed red;
+				margin: 0 auto;
+				text-align: center;
+				margin-bottom: 10px;		
+			}
+			#mydiv input{
+				width: 70%;
+				height: 25px;
+				margin-bottom: 10px;
+				font-size: 15px;
+			}
+			#myobj{
+				border:1px solid orange;			
+				background-color: #ccc;			
+			}
+		</style>
+	</head>
+	<body>
+		<div id="mydiv">
+		</div>
+		<input type="button" value="附加到尾部" id="btnAppend"/>
+		<input type="button" value="附加到头部" id="btnPrepend"/>
+		<input type="button" value="在前面插入" id="btnBefore"/>
+	    <input type="button" value="在后面插入" id="btnAfter"/>
+		<script src="../scripts/jquery-3.4.1.min.js"></script>
+		<script>
+		    $(function(){
+				var $div=$("#mydiv");
+				var $text=$('<input type="text" value="参考节点" id="myobj" />');
+				$div.append($text);
+				var count=1;//用于计数
+				
+				//创建节点创建函数
+				function createInput(){
+					var $input=$('<input type="text" />');
+					$input.val(count++);
+					return $input;
+				}
+				
+				//添加到尾部
+				$("#btnAppend").click(function(){
+					var $input=createInput();
+					$div.append($input);
+					
+				});
+				
+				//添加到首部
+				$("#btnPrepend").click(function(){
+					var $input=createInput();
+					$div.prepend($input);
+				});
+				
+				//在之前插入
+				$("#btnBefore").click(function(){
+					var $input=createInput();
+					$text.before($input);
+				});
+				
+				//在之后插入
+				$("#btnAfter").click(function(){
+					var $input=createInput();
+					$text.after($input);
+				});
+			});
+		</script>
+	</body>
+</html>

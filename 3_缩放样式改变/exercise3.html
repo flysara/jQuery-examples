@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>jQuery非固定样式修改</title>
+		<style>
+			#mydiv {
+				background-color: yellow;
+				width: 50px;
+				height: 50px;
+				margin-bottom: 10px;
+			}
+			
+			input[name='ratio'] {
+				width: 30px;
+				margin-bottom: 10px;
+			}
+			
+			#btnLarge,
+			#btnSmall {
+				width: 60px;
+				height: 30px;
+				font-size: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="mydiv">
+		</div>
+		<span>选择缩放系数：</span><br/>
+		<input type="radio" value="1.2" name="ratio" checked/>1.2
+		<input type="radio" value="1.5" name="ratio" />1.5<br />
+		<input type="button" value="+" id="btnLarge" />
+		<input type="button" value="-" id="btnSmall" />
+		<script src="../scripts/jquery-3.4.1.min.js"></script>
+		<script>
+			$(function(){
+				var $div=$("#mydiv");
+				var $large=$("#btnLarge");
+				var $small=$("#btnSmall");
+				
+				//改变大小函数
+				function changeDiv(length){
+					var ratio=$("input:checked").val();//选择缩放系数
+					
+					//选择初始块的高度和宽度
+					var width=$div.css("width");
+					var height=$div.css("height");
+					
+					if(length){
+						$div.css("width",parseInt(width)*ratio+"px");
+						$div.css("height",parseInt(height)*ratio+"px");
+						
+					}
+					else{
+						$div.css("width",parseInt(width)/ratio+"px");
+						$div.css("height",parseInt(height)/ratio+"px");
+					}
+					
+				};
+				
+				//按钮函数
+				$large.click(function(){
+					changeDiv(1);
+				});
+				
+				$small.click(function(){
+					changeDiv(0);
+				});
+				
+			
+				
+			});
+			
+		</script>
+	</body>
+</html>

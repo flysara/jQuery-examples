@@ -1,0 +1,34 @@
+	#biaopan{
+		position: relative;
+		height:800px;
+		width:800px;
+		margin:0 auto;
+		background:url("images/biaopan.jpg") no-repeat;
+		background-position: center;
+	}
+	
+	#minhand,#sechand,#hourhand{
+		position:absolute;
+		height:800px;
+		width:800px;
+		top:0;
+	}
+	#hourhand{
+		background:url("images/hourHand.png") no-repeat;
+		background-position:center; 
+		z-index: 100;
+		
+	}
+	#minhand{
+		background:url("images/minuteHand.png") no-repeat;
+		background-position:center; 
+		z-index: 200;
+		
+	}
+	
+	#sechand{
+		background:url("images/secondHand.png") no-repeat;
+		background-position:center; 
+		z-index: 300;
+		
+	}

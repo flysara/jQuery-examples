@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>jQuery删除HTML元素</title>
+		<style>
+			#content{
+				padding: 10px;
+				border: 2px dashed red;
+				text-align: left;
+			}
+			#content li{
+				margin-bottom: 10px;
+				margin-left: 20px;
+			}
+			#content li input{
+				float: right;
+			}
+		</style>
+	</head>
+	<body>
+		<ul id="content">
+			<li><span>这是Item1</span><input type="button" value="删除"/></li>
+			<li><span>这是Item2</span><input type="button" value="删除"/></li>
+			<li><span>这是Item3</span><input type="button" value="删除"/></li>
+			<li><span>这是Item4</span><input type="button" value="删除"/></li>
+			<li><span>这是Item5</span><input type="button" value="删除"/></li>
+			<li><span>这是Item6</span><input type="button" value="删除"/></li>
+		</ul>
+		<input type="button" value="增加项目" id="btnAdd"/>
+		<input type="button" value="全部删除" id="btnRemoveAll"/>
+		<script src="../scripts/jquery-3.4.1.min.js"></script>
+		<script>
+		   $(function(){
+			   var $ul=$("#content");
+			   var $add=$("#btnAdd");
+			   var $remove=$("#btnRemoveAll");
+			   
+			   //单个删除事件,利用事件代理,防止新添加的HTML时间元素丢失事件
+			   $ul.click(function(e){
+				   //移除当前项目
+				   $(e.target).parents("li").remove();
+			   });
+			   
+			   //增加新项目
+			   $add.click(function(){
+				   var len=$("#content li").length+1;//已有元素的长度
+				   var $input=$('<li><span>这是Item'+len+'</span><input type="button" value="删除"/></li>');
+				   $ul.append($input);
+			 
+			   });
+			   
+			   //全部删除
+			   $remove.click(function(){
+				   $ul.empty();
+			   });
+		   });
+		</script>
+	</body>
+</html>

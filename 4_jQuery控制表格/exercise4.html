@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0, user-scalable=no" />
+		<title>jQuery表格编程</title>
+		<style>
+			table {
+				margin: 0 auto;
+				font-size: 12px;
+				color: #333333;
+				border-width: 1px;
+				border-color: #666666;
+				border-collapse: collapse;
+			}
+			
+			table th {
+				background-color: #dedede;
+			}
+			
+			table th,
+			table td {
+				border-width: 1px;
+				padding: 8px;
+				border-style: solid;
+				border-color: #666666;
+			}
+			
+			table td {
+				text-align: center;
+			}
+			
+			.bkColorRed {
+				background-color: lightcoral;
+			}
+		</style>
+	</head>
+
+	<body>
+		<table id="dataTable">
+			<thead>
+				<th>学号</th>
+				<th>姓名</th>
+				<th>性别</th>
+				<th>党员</th>
+				<th>高等数学</th>
+				<th>大学英语</th>
+				<th>计算机文化基础</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>13310320712</td>
+					<td>陈中华</td>
+					<td>男</td>
+					<td><input type="checkbox" name="partymember" checked></td>
+					<td>87</td>
+					<td>83</td>
+					<td>94</td>
+				</tr>
+				<tr>
+					<td>13310320713</td>
+					<td>王楠</td>
+					<td>女</td>
+					<td><input type="checkbox" name="partymember" checked></td>
+					<td>84</td>
+					<td>85</td>
+					<td>93</td>
+				</tr>
+				<tr>
+					<td>13310320714</td>
+					<td>杨佳敏</td>
+					<td>女</td>
+					<td><input type="checkbox" name="partymember"></td>
+					<td>88</td>
+					<td>89</td>
+					<td>96</td>
+				</tr>
+				<tr>
+					<td>13310320715</td>
+					<td>李茂杨</td>
+					<td>男</td>
+					<td><input type="checkbox" name="partymember" checked></td>
+					<td>82</td>
+					<td>84</td>
+					<td>93</td>
+				</tr>
+				<tr>
+					<td>13310320716</td>
+					<td>赵家伟</td>
+					<td>男</td>
+					<td><input type="checkbox" name="partymember"></td>
+					<td>79</td>
+					<td>82</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>13310320717</td>
+					<td>张思琪</td>
+					<td>女</td>
+					<td><input type="checkbox" name="partymember" checked></td>
+					<td>94</td>
+					<td>82</td>
+					<td>90</td>
+				</tr>
+			</tbody>
+		</table>
+		<script src="../scripts/jquery-3.4.1.min.js"></script>
+		<script>
+			$(function(){
+			var $table=$("#dataTable");
+			
+			//创建表头
+			var $th=$("<th>平均成绩</th>");
+			$("#dataTable thead tr").append($th);
+			
+			//使用each()来进行遍历每一行表格
+			$("#dataTable tbody tr").each(function(){
+				var sum=0;
+			//使用each()来进行遍历每一行表格的每一个元素
+			$(this).find("td:gt(3)").each(function(){
+				sum=sum+parseInt($(this).text());
+			});
+			$(this).append($("<td>"+(sum/3).toFixed(1)+"</td>"));
+				
+			});
+			
+			//创建选择党员,且为87分以上的女生的背景为红色的函数,用each()函数遍历
+			$("#dataTable input:checked").each(function(){
+				var $tr=$(this).parents("tr");
+				if($tr.find("td:eq(2)").text()=="女"&&parseInt($tr.find("td:last").text())>=87)
+				{
+					$tr.css("backgroundColor","red");
+				}
+				
+			});
+			
+			});
+			
+		</script>
+	</body>
+
+</html>
